@@ -61,3 +61,4 @@ int main(int argc, char **argv) {
   printf("Total: %d\n", total_sum);
   return 0;
 }
+
