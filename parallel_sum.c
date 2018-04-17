@@ -39,7 +39,8 @@ int main(int argc, char **argv) {
    * your code here
    * Generate array here
    */
-
+<<<<<<< HEAD
+    //my code heare
   int *array = malloc(sizeof(int) * array_size);
 
   struct SumArgs args[threads_num];
@@ -62,3 +63,27 @@ int main(int argc, char **argv) {
   return 0;
 }
 
+=======
+
+  int *array = malloc(sizeof(int) * array_size);
+
+  struct SumArgs args[threads_num];
+  for (uint32_t i = 0; i < threads_num; i++) {
+    if (pthread_create(&threads[i], NULL, ThreadSum, (void *)&args)) {
+      printf("Error: pthread_create failed!\n");
+      return 1;
+    }
+  }
+
+  int total_sum = 0;
+  for (uint32_t i = 0; i < threads_num; i++) {
+    int sum = 0;
+    pthread_join(threads[i], (void **)&sum);
+    total_sum += sum;
+  }
+
+  free(array);
+  printf("Total: %d\n", total_sum);
+  return 0;
+}
+>>>>>>> refs/heads/master
