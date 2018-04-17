@@ -1,0 +1,16 @@
+CC=gcc
+CFLAGS=-I. -lpthread -lsumlib
+all : parallel_sum_my
+
+parallel_sum_my : libsumlib.so utils.h
+	$(CC) -o parallel_sum_my parallel_sum_my.c utils.c $(CFLAGS)
+
+libsumlib.so : libsumlib.o
+	$(CC) -o libsumlib.so libsumlib.o -shared
+	sudo cp libsumlib.so /usr/lib/libsumlib.so
+	
+libsumlib.o :
+	$(CC) -o libsumlib.o -c sumlib.c -fPIC
+	
+clean :
+	sudo rm libsumlib.o parallel_sum_my libsumlib.so /usr/lib/libsumlib.so
